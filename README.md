@@ -1,2 +1,2 @@
-# AI_JAM_KOREA_2020_EWHA_데장코알라
+# AI_JAM KOREA 2020 EWHA 데장코알라
 
