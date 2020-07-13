@@ -1,9 +1,14 @@
 from selenium import webdriver
 import time
+import openpyxl
 
 driver=webdriver.Chrome("C:/chromedriver")
 
 page=590661
+
+wb = openpyxl.Workbook()
+sheet = wb.active
+sheet.append(["제목", "청원수","카테고리","시작일","마감일","본문"])
 
 for i in range(page,589674,-1):
     driver.get("https://www1.president.go.kr/petitions/" + str(i))
@@ -21,7 +26,7 @@ for i in range(page,589674,-1):
     # 마감일
     end = detail_petition.find_element_by_css_selector("ul.petitionsView_info_list li:nth-of-type(3)").text.replace("청원마감\n","")
     # 본문
-    content = detail_petition.find_element_by_css_selector("div.petitionsView_left_pg div.View_write").text
+    content = detail_petition.find_element_by_css_selector("div.petitionsView_left_pg div.View_write").text.replace("\n","")
 
     time.sleep(1)
     print(title)
@@ -31,3 +36,7 @@ for i in range(page,589674,-1):
     print(end)
     print(content)
     print("="*50)
+
+    sheet.append([title, people,category,start,end,content])
+
+wb.save("petition.xlsx")
