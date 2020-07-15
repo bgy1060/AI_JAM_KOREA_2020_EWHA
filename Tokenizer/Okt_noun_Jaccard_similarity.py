@@ -34,7 +34,7 @@ for i in range(data['제목'].count()):
     hap_token = title_token + selected_words
     # print("제목 토큰 & 본문에서 가장 많이 나온 명사 15개: \n", hap_token)
 
-# 3. 불용어 제외하기
+# 3. 불용어 제거하기
     for word in hap_token:
         if word not in delete_word:
             final_token.append(word)
@@ -43,17 +43,20 @@ for i in range(data['제목'].count()):
 
 # 4. 새로운 글 & 기존의 청원글과 자카드 유사도 검사
     def Jaccard_similarity(existing, new):
-        # 중복 제거
+        # 중복되는 단어 제거
         existing = set(existing)
         new = set(new)
         return len(existing & new) / len(existing | new)
 
+    # 새로운 청원글 토큰화
     new_text = nltk.Text(new_petition)
     new_selected_words = [f[0] for f in new_text.vocab().most_common(15)]
+    # 새로운 청원글 불용어 제거
     for word in new_selected_words:
         if word not in delete_word:
             new_final_token.append(word)
 
+    # 기존의 모든 청원글과 새로운 청원글의 자카드 유사도 출력
     print('"' + data['제목'][i] + '"' + " 청원글과의 유사도: ", Jaccard_similarity(final_token, new_final_token))
 
 # 5. sorting된 순서로 자카드 유사도 가장 높은 상위 5개 글 제시
@@ -61,4 +64,6 @@ for i in range(data['제목'].count()):
 # print(df)
 sorted_df = df.sort_values(by = ['유사도'], axis = 0, ascending=False, inplace=False)
 sorted_petition = sorted_df.iloc[:5]
+
+# 자카드 유사도가 가장 높은 상위 5개 청원글 출력
 print("자카드 유사도가 가장 높은 상위 5개 청원글: \n", sorted_petition)
