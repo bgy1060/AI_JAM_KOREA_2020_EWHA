@@ -16,11 +16,7 @@ for content in data['본문']:
 
     text = nltk.Text(content_token)
 
-    # 전체 토큰의 개수
     print("전체 토큰의 개수: ", len(content_token))
-    # 중복을 제외한 토큰의 개수
     print("중복을 제외한 토큰의 개수:", len(set(content_token)))
-    # 출현 빈도가 높은 상위 토큰 20개
-    print("출현 빈도가 높은 상위 토큰 20개: ", text.vocab().most_common(20))
+    print("출현 빈도가 높은 상위 토큰 15개: ", text.vocab().most_common(15))
     print("-"*60)
-
