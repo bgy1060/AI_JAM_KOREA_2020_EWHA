@@ -61,7 +61,7 @@ for i in range(data['제목'].count()):
 
 # 5. sorting된 순서로 자카드 유사도 가장 높은 상위 5개 글 제시
     df = df.append({'청원글':data['제목'][i], '유사도':Jaccard_similarity(final_token, new_final_token)}, ignore_index=True)
-# print(df)
+
 sorted_df = df.sort_values(by = ['유사도'], axis = 0, ascending=False, inplace=False)
 sorted_petition = sorted_df.iloc[:5]
 
