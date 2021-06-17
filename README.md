@@ -108,7 +108,7 @@ print("출현 빈도가 높은 상위 토큰 15개: ", text.vocab().most_common(
 
 ```python
 df = df.append({'청원글':data['제목'][i], '청원수': data['청원수'][i], 
-                '상위토큰': final_token, '유사도':Jaccard_similarity(final_token, 		 					new_final_token)},ignore_index=True)
+                '상위토큰': final_token, '유사도':Jaccard_similarity(final_token,new_final_token)},ignore_index=True)
 final_token = []
 ```
 
@@ -124,9 +124,9 @@ print("자카드 유사도가 가장 높은 상위 5개 청원글: \n", sorted_p
 ```
 
   
-
+</br>
 ![img](https://lh5.googleusercontent.com/L1dHOo9VdgUANx01VcYBM1YAATZ9MXSHavNwPq9aRH8X8OijbyUH8KaIenO3v1ZyzOFs4WebB4W99Q3BoqdO9AsWTs8jWGHGqIxTo_m0lGvPn6WoCkjjRKcGVPXUac5yl2Zp7yTd8AE)
-
+</br>
 - 유사도 그래프 출력
 
 ```python
@@ -148,9 +148,9 @@ plt.scatter(xs, ys, marker='o')
 for i, v in enumerate(words):
     plt.annotate(v, xy=(xs[i], ys[i]))
 ```
-
+</br>
 ![img](https://lh6.googleusercontent.com/orovDDQo99xGWD3xD2Ue1g3xot4N9s0iZSi3shpXzwqsXsVI6c9dMeRumDM1NoC0AGFQoCGG4GLdwiFOZ_TaqSCTf8bFAGQA1aLDgZHvEoPCHOihpaMdy7XG8pzhoxDSExMyS3uctN8)
-
+</br>
 - 유사도 기반 청원수 예측
 
 ```python
@@ -159,7 +159,7 @@ denominator = 0
 
 for i in range(5):   # 5개의 기존 청원글
     for k in range(5): # 5개의 상위토큰           
-        similarity_rate = ko_model.wv.similarity(new_final_token[k], 							sorted_petition.iloc[i].iloc[2][k]) # 1:1 유사도
+        similarity_rate = ko_model.wv.similarity(new_final_token[k],sorted_petition.iloc[i].iloc[2][k]) # 1:1 유사도
         similarity_rate_hap += similarity_rate
     similarity_rate_mean = similarity_rate_hap / 5   # 상위토큰 5개의 유사도 평균
     
